@@ -10,7 +10,6 @@ if ('serviceWorker' in navigator) {
 }
 </script><style>
 body { 
-  padding-top: 60px; 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f8f9fa;
 }
@@ -52,12 +51,17 @@ body {
 .header { 
   background: linear-gradient(135deg, #28a745, #20c997);
   color: white;
-  padding: 2rem 0;
-  margin-bottom: 2rem;
+  padding: 1rem 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.header h1 { font-weight: 700; }
-.welcome-message { font-style: italic; }
+.header h1 { 
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.welcome-message { 
+  font-style: italic;
+  margin-bottom: 0;
+}
 .modal-content { border-radius: 15px; }
 .modal-header { border-radius: 15px 15px 0 0; }
 .modal-body { padding: 2rem; }
@@ -88,7 +92,60 @@ body {
   color: #c82333;
   transform: scale(1.1);
 }
-</style></head><body><nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"><div class="container-fluid"><a class="navbar-brand" href="#"><i class="bi bi-droplet-fill me-2"></i>InzulSmart Balkan</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" aria-current="page" href="#" id="calculatorLink"><i class="bi bi-calculator me-1"></i>Kalkulator</a></li><li class="nav-item"><a class="nav-link" href="#" id="historyLink"><i class="bi bi-clock-history me-1"></i>Historija</a></li></ul></div></div></nav><div id="welcomePage" class="container"><div class="header text-center"><h1><i class="bi bi-heart-pulse me-2"></i>Dobrodošli u Kalkulator Inzulina</h1></div><form id="welcomeForm" class="mt-4"><div class="mb-3"><label for="userName" class="form-label">Unesite vaše ime:</label><input type="text" class="form-control" id="userName" required></div><button type="submit" class="btn btn-primary"><i class="bi bi-box-arrow-in-right me-2"></i>Započni</button></form></div><div id="mainApp" class="d-none"><div class="header"><div class="container"><h1><i class="bi bi-droplet-half me-2"></i>Kalkulator Inzulina</h1><p class="welcome-message" id="welcomeMessage"></p></div></div><div class="container" id="calculatorPage"><form id="insulinForm"><div class="mb-3"><label for="carbIntake" class="form-label">Koliko ćete ugljenih hidrata pojesti? (grama)</label><input type="number" class="form-control" id="carbIntake" required></div><div class="mb-3"><label for="bloodSugar" class="form-label">Koliko je visok šećer u krvi? (mmol/L)</label><input type="number" step="0.1" class="form-control" id="bloodSugar" required></div><div class="mb-3"><label for="carbRatio" class="form-label">Koji je vaš omjer ugljikohidrata i inzulina?</label><input type="number" step="0.1" class="form-control" id="carbRatio" required></div><div class="mb-3"><label for="insulinSensitivity" class="form-label">Koji je vaš faktor osjetljivosti?</label><input type="number" step="0.1" class="form-control" id="insulinSensitivity" required></div><div class="mb-3"><label for="targetBloodSugar" class="form-label">Koji je vaš ciljani šećer u krvi? (mmol/L)</label><input type="number" step="0.1" class="form-control" id="targetBloodSugar" required></div><button type="submit" class="btn btn-primary"><i class="bi bi-calculator me-2"></i>Izračunaj dozu inzulina</button></form><div id="result" class="mt-4"></div></div><div class="container d-none" id="historyPage"><h2 class="mb-4"><i class="bi bi-clock-history me-2"></i>Historija doza inzulina</h2><div id="historyList"></div></div></div><div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="resultModalLabel"><i class="bi bi-clipboard-data me-2"></i>Rezultat izračuna</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zatvori"></button></div><div class="modal-body" id="modalBody"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle me-2"></i>Zatvori</button></div></div></div></div><footer class="mt-5 text-center text-muted"><p>© 2024 InzulSmart. </p><p class="p-2">Razvila Mr.med.sci dr. Azra Feukić, specijalista pedijatar, subspecijalista pedijatrijske endokrinologije </p></p></footer><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script>
+.navbar-toggler {
+  border: none;
+}
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    height: 100%;
+    background-color: #28a745;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar-collapse.collapsing {
+    height: 100%;
+    transition: left 300ms ease;
+    left: -100%;
+  }
+  .navbar-collapse.show {
+    left: 0;
+    transition: left 300ms ease;
+  }
+  .navbar-nav {
+    width: 100%;
+  }
+  .navbar-nav .nav-item {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .navbar-nav .nav-link {
+    font-size: 1.5rem;
+  }
+  .close-nav-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+}
+.form-control {
+  max-width: 120px;
+}
+</style></head><body><header class="header"><nav class="navbar navbar-expand-lg navbar-dark"><div class="container"><a class="navbar-brand" href="#"><i class="bi bi-droplet-fill me-2"></i>InzulSmart Balkan</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><span class="close-nav-btn d-lg-none">&times;</span><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link active" aria-current="page" href="#" id="calculatorLink"><i class="bi bi-calculator me-1"></i>Kalkulator</a></li><li class="nav-item"><a class="nav-link" href="#" id="historyLink"><i class="bi bi-clock-history me-1"></i>Historija</a></li></ul></div></div></nav><div class="container"><h1><i class="bi bi-droplet-half me-2"></i>Kalkulator Inzulina</h1><p class="welcome-message" id="welcomeMessage"></p></div></header><div id="welcomePage" class="container mt-4"><div class="text-center"><h2>Dobrodošli u InzulSmart Balkan</h2></div><form id="welcomeForm" class="mt-4"><div class="mb-3"><label for="userName" class="form-label">Unesite vaše ime:</label><input type="text" class="form-control" id="userName" required></div><button type="submit" class="btn btn-primary"><i class="bi bi-box-arrow-in-right me-2"></i>Započni</button></form></div><div id="mainApp" class="d-none"><div class="container mt-4" id="calculatorPage"><form id="insulinForm"><div class="mb-3"><label for="carbIntake" class="form-label">Ugljeni hidrati (g)</label><input type="number" class="form-control" id="carbIntake" required></div><div class="mb-3"><label for="bloodSugar" class="form-label">Šećer u krvi (mmol/L)</label><input type="number" step="0.1" class="form-control" id="bloodSugar" required></div><div class="mb-3"><label for="carbRatio" class="form-label">Omjer UH i inzulina</label><input type="number" step="0.1" class="form-control" id="carbRatio" required></div><div class="mb-3"><label for="insulinSensitivity" class="form-label">Faktor osjetljivosti</label><input type="number" step="0.1" class="form-control" id="insulinSensitivity" required></div><div class="mb-3"><label for="targetBloodSugar" class="form-label">Ciljani šećer (mmol/L)</label><input type="number" step="0.1" class="form-control" id="targetBloodSugar" required></div><button type="submit" class="btn btn-primary"><i class="bi bi-calculator me-2"></i>Izračunaj dozu inzulina</button></form><div id="result" class="mt-4"></div></div><div class="container mt-4 d-none" id="historyPage"><h2 class="mb-4"><i class="bi bi-clock-history me-2"></i>Historija doza inzulina</h2><div id="historyList"></div></div></div><div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="resultModalLabel"><i class="bi bi-clipboard-data me-2"></i>Rezultat izračuna</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zatvori"></button></div><div class="modal-body" id="modalBody"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle me-2"></i>Zatvori</button></div></div></div></div><footer class="mt-5 text-center text-muted"><p>© 2024 InzulSmart. </p><p class="p-2">Razvila Mr.med.sci dr. Azra Feukić, specijalista pedijatar, subspecijalista pedijatrijske endokrinologije </p></footer><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script>
 const welcomePage = document.getElementById('welcomePage');
 const mainApp = document.getElementById('mainApp');
 const welcomeForm = document.getElementById('welcomeForm');
@@ -102,6 +159,8 @@ const resultDiv = document.getElementById('result');
 const historyList = document.getElementById('historyList');
 const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
 const modalBody = document.getElementById('modalBody');
+const navbarCollapse = document.querySelector('.navbar-collapse');
+const closeNavBtn = document.querySelector('.close-nav-btn');
 
 function showMainApp() {
   welcomePage.classList.add('d-none');
@@ -136,6 +195,7 @@ calculatorLink.addEventListener('click', (e) => {
   historyPage.classList.add('d-none');
   calculatorLink.classList.add('active');
   historyLink.classList.remove('active');
+  closeNavbar();
 });
 
 historyLink.addEventListener('click', (e) => {
@@ -145,6 +205,7 @@ historyLink.addEventListener('click', (e) => {
   calculatorLink.classList.remove('active');
   historyLink.classList.add('active');
   displayHistory();
+  closeNavbar();
 });
 
 insulinForm.addEventListener('submit', (e) => {
@@ -238,4 +299,24 @@ function deleteHistoryItem(id) {
     displayHistory();
   });
 }
+
+function closeNavbar() {
+  if (navbarCollapse.classList.contains('show')) {
+    navbarCollapse.classList.remove('show');
+  }
+}
+
+closeNavBtn.addEventListener('click', closeNavbar);
+
+// Close navbar when clicking outside
+document.addEventListener('click', (e) => {
+  if (!navbarCollapse.contains(e.target) && !e.target.matches('.navbar-toggler')) {
+    closeNavbar();
+  }
+});
+
+// Close navbar when clicking on any menu item
+document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+  link.addEventListener('click', closeNavbar);
+});
 </script></body></html>
