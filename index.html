@@ -1,4 +1,4 @@
-<html><head><base href="https://"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>InzulSmart Balkan</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"><link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkthbGt1bGF0b3IgSW56dWxpbmEiLAogICJzaG9ydF9uYW1lIjogIkluc3VsaW4gS2FsayIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZmZmZmZmIiwKICAidGhlbWVfY29sb3IiOiAiIzI4YTc0NSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9ucG0vYm9vdHN0cmFwLWljb25zQDEuMTAuNS9pY29ucy9kcm9wcGVyLWZpbGwuc3ZnIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ=="><script>
+<html><head><base href="https://"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#28a745"><title>InzulSmart Balkan</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkluenVsU21hcnQgQmFsa2FuIiwKICAic2hvcnRfbmFtZSI6ICJJbnp1bFNtYXJ0IiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICJ0aGVtZV9jb2xvciI6ICIjMjhhNzQ1IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbi0xOTJ4MTkyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29uLTUxMng1MTIucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9CiAgXQp9"><script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then(registration => {
@@ -8,39 +8,72 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+// Provjera da li je aplikacija instalirana
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Ovdje možete dodati logiku za prikazivanje dugmeta za instalaciju
+  showInstallButton();
+});
+
+function showInstallButton() {
+  const installButton = document.createElement('button');
+  installButton.innerText = 'Instaliraj aplikaciju';
+  installButton.classList.add('btn', 'btn-success', 'mt-3');
+  installButton.addEventListener('click', installApp);
+  document.body.appendChild(installButton);
+}
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('Korisnik je prihvatio instalaciju');
+      } else {
+        console.log('Korisnik je odbio instalaciju');
+      }
+      deferredPrompt = null;
+    });
+  }
+}
 </script><style>
 body { 
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: #f8f9fa;
+  font-size: 16px;
+  line-height: 1.6;
 }
 .history-item { 
   border: 1px solid #dee2e6; 
   padding: 20px;
   background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   margin-bottom: 20px;
   transition: all 0.3s ease;
 }
 .history-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 .history-item .total-dose {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 600;
   color: #28a745;
   margin-bottom: 15px;
   text-align: center;
   padding: 10px;
   background-color: #e9ecef;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 .history-item .input-data,
 .history-item .result-data {
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
 }
 .history-item .input-data {
   background-color: #f8f9fa;
@@ -51,21 +84,34 @@ body {
 .header { 
   background: linear-gradient(135deg, #28a745, #20c997);
   color: white;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .header h1 { 
   font-weight: 700;
   margin-bottom: 0;
+  font-size: 2.5rem;
 }
 .welcome-message { 
   font-style: italic;
-  margin-bottom: 0;
+  margin-top: 1rem;
+  font-size: 1.2rem;
 }
-.modal-content { border-radius: 15px; }
-.modal-header { border-radius: 15px 15px 0 0; }
-.modal-body { padding: 2rem; }
-.modal-footer { border-radius: 0 0 15px 15px; }
+.modal-content { 
+  border-radius: 15px; 
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.modal-header { 
+  border-radius: 15px 15px 0 0;
+  background-color: #28a745;
+  color: white;
+}
+.modal-body { 
+  padding: 2rem; 
+}
+.modal-footer { 
+  border-radius: 0 0 15px 15px; 
+}
 .animate__animated { --animate-duration: 0.5s; }
 .btn-primary, .bg-primary {
   background-color: #28a745 !important;
@@ -77,7 +123,14 @@ body {
 }
 .navbar-dark .navbar-nav .nav-link.active {
   color: #ffffff;
-  font-weight: bold;
+  font-weight: 600;
+}
+.form-control {
+  border-radius: 10px;
+  border: 2px solid #ced4da;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 .form-control:focus {
   border-color: #28a745;
@@ -113,6 +166,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 1050;
   }
   .navbar-collapse.collapsing {
     height: 100%;
@@ -143,17 +197,30 @@ body {
   }
 }
 .form-control {
-  max-width: 120px;
+  max-width: 250px;
+  margin: 0 auto;
+  font-size: 1.1rem;
 }
-</style></head><body><header class="header"><nav class="navbar navbar-expand-lg navbar-dark"><div class="container"><a class="navbar-brand" href="#"><i class="bi bi-droplet-fill me-2"></i>InzulSmart Balkan</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><span class="close-nav-btn d-lg-none">&times;</span><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link active" aria-current="page" href="#" id="calculatorLink"><i class="bi bi-calculator me-1"></i>Kalkulator</a></li><li class="nav-item"><a class="nav-link" href="#" id="historyLink"><i class="bi bi-clock-history me-1"></i>Historija</a></li></ul></div></div></nav><div class="container"><h1><i class="bi bi-droplet-half me-2"></i>Kalkulator Inzulina</h1><p class="welcome-message" id="welcomeMessage"></p></div></header><div id="welcomePage" class="container mt-4"><div class="text-center"><h2>Dobrodošli u InzulSmart Balkan</h2></div><form id="welcomeForm" class="mt-4"><div class="mb-3"><label for="userName" class="form-label">Unesite vaše ime:</label><input type="text" class="form-control" id="userName" required></div><button type="submit" class="btn btn-primary"><i class="bi bi-box-arrow-in-right me-2"></i>Započni</button></form></div><div id="mainApp" class="d-none"><div class="container mt-4" id="calculatorPage"><form id="insulinForm"><div class="mb-3"><label for="carbIntake" class="form-label">Ugljeni hidrati (g)</label><input type="number" class="form-control" id="carbIntake" required></div><div class="mb-3"><label for="bloodSugar" class="form-label">Šećer u krvi (mmol/L)</label><input type="number" step="0.1" class="form-control" id="bloodSugar" required></div><div class="mb-3"><label for="carbRatio" class="form-label">Omjer UH i inzulina</label><input type="number" step="0.1" class="form-control" id="carbRatio" required></div><div class="mb-3"><label for="insulinSensitivity" class="form-label">Faktor osjetljivosti</label><input type="number" step="0.1" class="form-control" id="insulinSensitivity" required></div><div class="mb-3"><label for="targetBloodSugar" class="form-label">Ciljani šećer (mmol/L)</label><input type="number" step="0.1" class="form-control" id="targetBloodSugar" required></div><button type="submit" class="btn btn-primary"><i class="bi bi-calculator me-2"></i>Izračunaj dozu inzulina</button></form><div id="result" class="mt-4"></div></div><div class="container mt-4 d-none" id="historyPage"><h2 class="mb-4"><i class="bi bi-clock-history me-2"></i>Historija doza inzulina</h2><div id="historyList"></div></div></div><div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="resultModalLabel"><i class="bi bi-clipboard-data me-2"></i>Rezultat izračuna</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zatvori"></button></div><div class="modal-body" id="modalBody"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle me-2"></i>Zatvori</button></div></div></div></div><footer class="mt-5 text-center text-muted"><p>© 2024 InzulSmart. </p><p class="p-2">Razvila Mr.med.sci dr. Azra Feukić, specijalista pedijatar, subspecijalista pedijatrijske endokrinologije </p></footer><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script>
+.form-label {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.btn {
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+}
+</style></head><body><header class="header"><nav class="navbar navbar-expand-lg navbar-dark"><div class="container"><span class="navbar-brand"><i class="bi bi-droplet-fill me-2"></i>InzulSmart Balkan</span><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><span class="close-nav-btn d-lg-none">&times;</span><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link active" aria-current="page" href="#" id="calculatorLink"><i class="bi bi-calculator me-1"></i>Kalkulator</a></li><li class="nav-item"><a class="nav-link" href="#" id="historyLink"><i class="bi bi-clock-history me-1"></i>Historija</a></li><li class="nav-item"><a class="nav-link" href="#" id="aboutLink"><i class="bi bi-info-circle me-1"></i>O aplikaciji</a></li></ul></div></div></nav><div class="container"><h1 class="text-center"><i class="bi bi-droplet-half me-2"></i>Kalkulator Inzulina</h1><p class="welcome-message text-center" id="welcomeMessage"></p></div></header><div id="welcomePage" class="container mt-4"><div class="text-center"><h2>Dobrodošli u InzulSmart Balkan</h2></div><form id="welcomeForm" class="mt-4"><div class="mb-3 text-center"><label for="userName" class="form-label">Unesite vaše ime:</label><input type="text" class="form-control" id="userName" required></div><div class="text-center"><button type="submit" class="btn btn-primary"><i class="bi bi-box-arrow-in-right me-2"></i>Započni</button></div></form></div><div id="mainApp" class="d-none"><div class="container mt-4" id="calculatorPage"><form id="insulinForm" class="text-center"><div class="mb-3"><label for="carbIntake" class="form-label">Koliko ćete ugljenih hidrata pojesti? (g)</label><input type="number" class="form-control" id="carbIntake" required></div><div class="mb-3"><label for="bloodSugar" class="form-label">Koliko je visok šećer u krvi? (mmol/L)</label><input type="number" step="0.1" class="form-control" id="bloodSugar" required></div><div class="mb-3"><label for="carbRatio" class="form-label">Koji je vaš omjer ugljikohidrata i inzulina?</label><input type="number" step="0.1" class="form-control" id="carbRatio" required></div><div class="mb-3"><label for="insulinSensitivity" class="form-label">Koji je vaš faktor osjetljivosti?</label><input type="number" step="0.1" class="form-control" id="insulinSensitivity" required></div><div class="mb-3"><label for="targetBloodSugar" class="form-label">Koji je vaš ciljani šećer u krvi? (mmol/L)</label><input type="number" step="0.1" class="form-control" id="targetBloodSugar" required></div><button type="submit" class="btn btn-primary"><i class="bi bi-calculator me-2"></i>Izračunaj dozu inzulina</button></form><div id="result" class="mt-4"></div></div><div class="container mt-4 d-none" id="historyPage"><h2 class="mb-4 text-center"><i class="bi bi-clock-history me-2"></i>Historija doza inzulina</h2><div id="historyList"></div></div><div class="container mt-4 d-none" id="aboutPage"><h2 class="mb-4 text-center"><i class="bi bi-info-circle me-2"></i>O aplikaciji</h2><div class="card"><div class="card-body"><h3>Kako koristiti aplikaciju</h3><ol><li>Na stranici "Kalkulator", unesite tražene podatke u sva polja.</li><li>Kliknite na dugme "Izračunaj dozu inzulina" da dobijete rezultat.</li><li>Rezultat će se prikazati u skočnom prozoru sa detaljima izračuna.</li><li>Svaki izračun se automatski sprema u historiju.</li></ol><h3>Korištenje historije</h3><ol><li>Kliknite na "Historija" u glavnom meniju da pregledate prethodne izračune.</li><li>Svaki unos u historiji prikazuje datum i vrijeme izračuna, unesene podatke i rezultate.</li><li>Možete obrisati pojedinačne unose iz historije klikom na ikonu kante za smeće pored svakog unosa.</li></ol><p>Napomena: Ova aplikacija je namijenjena kao pomoćno sredstvo i ne zamjenjuje stručni medicinski savjet. Uvijek se posavjetujte sa svojim liječnikom o doziranju inzulina.</p></div></div></div></div><div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="resultModalLabel"><i class="bi bi-clipboard-data me-2"></i>Rezultat izračuna</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zatvori"></button></div><div class="modal-body" id="modalBody"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle me-2"></i>Zatvori</button></div></div></div></div><footer class="mt-5 text-center text-muted"><p>© 2024 InzulSmart. </p><p class="p-2">Razvila Mr.med.sci dr. Azra Feukić, specijalista pedijatar, subspecijalista pedijatrijske endokrinologije </p></footer><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script>
 const welcomePage = document.getElementById('welcomePage');
 const mainApp = document.getElementById('mainApp');
 const welcomeForm = document.getElementById('welcomeForm');
 const welcomeMessage = document.getElementById('welcomeMessage');
 const calculatorPage = document.getElementById('calculatorPage');
 const historyPage = document.getElementById('historyPage');
+const aboutPage = document.getElementById('aboutPage');
 const calculatorLink = document.getElementById('calculatorLink');
 const historyLink = document.getElementById('historyLink');
+const aboutLink = document.getElementById('aboutLink');
 const insulinForm = document.getElementById('insulinForm');
 const resultDiv = document.getElementById('result');
 const historyList = document.getElementById('historyList');
@@ -193,8 +260,10 @@ calculatorLink.addEventListener('click', (e) => {
   e.preventDefault();
   calculatorPage.classList.remove('d-none');
   historyPage.classList.add('d-none');
+  aboutPage.classList.add('d-none');
   calculatorLink.classList.add('active');
   historyLink.classList.remove('active');
+  aboutLink.classList.remove('active');
   closeNavbar();
 });
 
@@ -202,9 +271,22 @@ historyLink.addEventListener('click', (e) => {
   e.preventDefault();
   calculatorPage.classList.add('d-none');
   historyPage.classList.remove('d-none');
+  aboutPage.classList.add('d-none');
   calculatorLink.classList.remove('active');
   historyLink.classList.add('active');
+  aboutLink.classList.remove('active');
   displayHistory();
+  closeNavbar();
+});
+
+aboutLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  calculatorPage.classList.add('d-none');
+  historyPage.classList.add('d-none');
+  aboutPage.classList.remove('d-none');
+  calculatorLink.classList.remove('active');
+  historyLink.classList.remove('active');
+  aboutLink.classList.add('active');
   closeNavbar();
 });
 
