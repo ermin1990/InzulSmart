@@ -1,45 +1,4 @@
-<html><head><base href="https://"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#28a745"><title>InzulSmart Balkan</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkluenVsU21hcnQgQmFsa2FuIiwKICAic2hvcnRfbmFtZSI6ICJJbnp1bFNtYXJ0IiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICJ0aGVtZV9jb2xvciI6ICIjMjhhNzQ1IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbi0xOTJ4MTkyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29uLTUxMng1MTIucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9CiAgXQp9"><script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').then(registration => {
-      console.log('ServiceWorker registracija uspješna');
-    }, err => {
-      console.log('ServiceWorker registracija nije uspjela: ', err);
-    });
-  });
-}
-
-// Provjera da li je aplikacija instalirana
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  // Ovdje možete dodati logiku za prikazivanje dugmeta za instalaciju
-  showInstallButton();
-});
-
-function showInstallButton() {
-  const installButton = document.createElement('button');
-  installButton.innerText = 'Instaliraj aplikaciju';
-  installButton.classList.add('btn', 'btn-success', 'mt-3');
-  installButton.addEventListener('click', installApp);
-  document.body.appendChild(installButton);
-}
-
-function installApp() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('Korisnik je prihvatio instalaciju');
-      } else {
-        console.log('Korisnik je odbio instalaciju');
-      }
-      deferredPrompt = null;
-    });
-  }
-}
-</script><style>
+<html><head><base href="https://"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#28a745"><title>InzulSmart Balkan</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script><style>
 body { 
   font-family: 'Poppins', sans-serif;
   background-color: #f8f9fa;
@@ -47,39 +6,21 @@ body {
   line-height: 1.6;
 }
 .history-item { 
-  border: 1px solid #dee2e6; 
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
   padding: 20px;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   margin-bottom: 20px;
   transition: all 0.3s ease;
+  background-color: #ffffff;
 }
 .history-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 .history-item .total-dose {
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: #28a745;
   margin-bottom: 15px;
-  text-align: center;
-  padding: 10px;
-  background-color: #e9ecef;
-  border-radius: 10px;
-}
-.history-item .input-data,
-.history-item .result-data {
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-}
-.history-item .input-data {
-  background-color: #f8f9fa;
-}
-.history-item .result-data {
-  background-color: #e9ecef;
 }
 .header { 
   background: linear-gradient(135deg, #28a745, #20c997);
@@ -210,7 +151,82 @@ body {
   padding: 0.5rem 1.5rem;
   border-radius: 10px;
 }
-</style></head><body><header class="header"><nav class="navbar navbar-expand-lg navbar-dark"><div class="container"><span class="navbar-brand"><i class="bi bi-droplet-fill me-2"></i>InzulSmart Balkan</span><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><span class="close-nav-btn d-lg-none">&times;</span><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link active" aria-current="page" href="#" id="calculatorLink"><i class="bi bi-calculator me-1"></i>Kalkulator</a></li><li class="nav-item"><a class="nav-link" href="#" id="historyLink"><i class="bi bi-clock-history me-1"></i>Historija</a></li><li class="nav-item"><a class="nav-link" href="#" id="aboutLink"><i class="bi bi-info-circle me-1"></i>O aplikaciji</a></li></ul></div></div></nav><div class="container"><h1 class="text-center"><i class="bi bi-droplet-half me-2"></i>Kalkulator Inzulina</h1><p class="welcome-message text-center" id="welcomeMessage"></p></div></header><div id="welcomePage" class="container mt-4"><div class="text-center"><h2>Dobrodošli u InzulSmart Balkan</h2></div><form id="welcomeForm" class="mt-4"><div class="mb-3 text-center"><label for="userName" class="form-label">Unesite vaše ime:</label><input type="text" class="form-control" id="userName" required></div><div class="text-center"><button type="submit" class="btn btn-primary"><i class="bi bi-box-arrow-in-right me-2"></i>Započni</button></div></form></div><div id="mainApp" class="d-none"><div class="container mt-4" id="calculatorPage"><form id="insulinForm" class="text-center"><div class="mb-3"><label for="carbIntake" class="form-label">Koliko ćete ugljenih hidrata pojesti? (g)</label><input type="number" class="form-control" id="carbIntake" required></div><div class="mb-3"><label for="bloodSugar" class="form-label">Koliko je visok šećer u krvi? (mmol/L)</label><input type="number" step="0.1" class="form-control" id="bloodSugar" required></div><div class="mb-3"><label for="carbRatio" class="form-label">Koji je vaš omjer ugljikohidrata i inzulina?</label><input type="number" step="0.1" class="form-control" id="carbRatio" required></div><div class="mb-3"><label for="insulinSensitivity" class="form-label">Koji je vaš faktor osjetljivosti?</label><input type="number" step="0.1" class="form-control" id="insulinSensitivity" required></div><div class="mb-3"><label for="targetBloodSugar" class="form-label">Koji je vaš ciljani šećer u krvi? (mmol/L)</label><input type="number" step="0.1" class="form-control" id="targetBloodSugar" required></div><button type="submit" class="btn btn-primary"><i class="bi bi-calculator me-2"></i>Izračunaj dozu inzulina</button></form><div id="result" class="mt-4"></div></div><div class="container mt-4 d-none" id="historyPage"><h2 class="mb-4 text-center"><i class="bi bi-clock-history me-2"></i>Historija doza inzulina</h2><div id="historyList"></div></div><div class="container mt-4 d-none" id="aboutPage"><h2 class="mb-4 text-center"><i class="bi bi-info-circle me-2"></i>O aplikaciji</h2><div class="card"><div class="card-body"><h3>Kako koristiti aplikaciju</h3><ol><li>Na stranici "Kalkulator", unesite tražene podatke u sva polja.</li><li>Kliknite na dugme "Izračunaj dozu inzulina" da dobijete rezultat.</li><li>Rezultat će se prikazati u skočnom prozoru sa detaljima izračuna.</li><li>Svaki izračun se automatski sprema u historiju.</li></ol><h3>Korištenje historije</h3><ol><li>Kliknite na "Historija" u glavnom meniju da pregledate prethodne izračune.</li><li>Svaki unos u historiji prikazuje datum i vrijeme izračuna, unesene podatke i rezultate.</li><li>Možete obrisati pojedinačne unose iz historije klikom na ikonu kante za smeće pored svakog unosa.</li></ol><p>Napomena: Ova aplikacija je namijenjena kao pomoćno sredstvo i ne zamjenjuje stručni medicinski savjet. Uvijek se posavjetujte sa svojim liječnikom o doziranju inzulina.</p></div></div></div></div><div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="resultModalLabel"><i class="bi bi-clipboard-data me-2"></i>Rezultat izračuna</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zatvori"></button></div><div class="modal-body" id="modalBody"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle me-2"></i>Zatvori</button></div></div></div></div><footer class="mt-5 text-center text-muted"><p>© 2024 InzulSmart. </p><p class="p-2">Razvila Mr.med.sci dr. Azra Feukić, specijalista pedijatar, subspecijalista pedijatrijske endokrinologije </p></footer><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script>
+.month-group h3 {
+  color: #28a745;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e8f5e9;
+}
+.nav-tabs {
+  border-bottom: 2px solid #28a745;
+}
+.nav-tabs .nav-link {
+  color: #495057;
+  background-color: #f8f9fa;
+  border: none;
+  border-radius: 10px 10px 0 0;
+  padding: 12px 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.nav-tabs .nav-link:hover {
+  background-color: #e8f5e9;
+}
+.nav-tabs .nav-link.active {
+  color: #ffffff;
+  background-color: #28a745;
+  border: none;
+  font-weight: 600;
+}
+.tab-content {
+  border: none;
+  border-radius: 0 0 15px 15px;
+  padding: 30px;
+}
+#bloodSugarChart {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.history-item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+.history-item-section {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+}
+.history-item-section h6 {
+  color: #28a745;
+  margin-bottom: 10px;
+}
+#bloodSugarTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+#bloodSugarTable th, #bloodSugarTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+#bloodSugarTable th {
+  background-color: #28a745;
+  color: white;
+}
+#bloodSugarTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+#bloodSugarTable tr:hover {
+  background-color: #ddd;
+}
+</style></head><body><header class="header"><nav class="navbar navbar-expand-lg navbar-dark"><div class="container"><span class="navbar-brand"><i class="bi bi-droplet-fill me-2"></i>InzulSmart Balkan</span><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><span class="close-nav-btn d-lg-none">&times;</span><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link active" aria-current="page" href="#" id="calculatorLink"><i class="bi bi-calculator me-1"></i>Kalkulator</a></li><li class="nav-item"><a class="nav-link" href="#" id="historyLink"><i class="bi bi-clock-history me-1"></i>Historija</a></li><li class="nav-item"><a class="nav-link" href="#" id="aboutLink"><i class="bi bi-info-circle me-1"></i>O aplikaciji</a></li></ul></div></div></nav><div class="container"><h1 class="text-center"><i class="bi bi-droplet-half me-2"></i>Kalkulator Inzulina</h1><p class="welcome-message text-center" id="welcomeMessage"></p></div></header><div id="welcomePage" class="container mt-4"><div class="text-center"><h2>Dobrodošli u InzulSmart Balkan</h2></div><form id="welcomeForm" class="mt-4"><div class="mb-3 text-center"><label for="userName" class="form-label">Unesite vaše ime:</label><input type="text" class="form-control" id="userName" required></div><div class="text-center"><button type="submit" class="btn btn-primary"><i class="bi bi-box-arrow-in-right me-2"></i>Započni</button></div></form></div><div id="mainApp" class="d-none"><div class="container mt-4" id="calculatorPage"><form id="insulinForm" class="text-center"><div class="mb-3"><label for="carbIntake" class="form-label">Koliko ćete ugljenih hidrata pojesti? (g)</label><input type="number" class="form-control" id="carbIntake" required></div><div class="mb-3"><label for="bloodSugar" class="form-label">Koliko je visok šećer u krvi? (mmol/L)</label><input type="number" step="0.1" class="form-control" id="bloodSugar" required></div><div class="mb-3"><label for="carbRatio" class="form-label">Koji je vaš omjer ugljikohidrata i inzulina?</label><input type="number" step="0.1" class="form-control" id="carbRatio" required></div><div class="mb-3"><label for="insulinSensitivity" class="form-label">Koji je vaš faktor osjetljivosti?</label><input type="number" step="0.1" class="form-control" id="insulinSensitivity" required></div><div class="mb-3"><label for="targetBloodSugar" class="form-label">Koji je vaš ciljani šećer u krvi? (mmol/L)</label><input type="number" step="0.1" class="form-control" id="targetBloodSugar" required></div><button type="submit" class="btn btn-primary"><i class="bi bi-calculator me-2"></i>Izračunaj dozu inzulina</button></form><div id="result" class="mt-4"></div></div><div class="container mt-4 d-none" id="historyPage"><h2 class="mb-4 text-center"><i class="bi bi-clock-history me-2"></i>Historija doza inzulina</h2><ul class="nav nav-tabs mb-4" id="historyTabs" role="tablist"><li class="nav-item" role="presentation"><button class="nav-link active" id="calculations-tab" data-bs-toggle="tab" data-bs-target="#calculations" type="button" role="tab" aria-controls="calculations" aria-selected="true"><i class="bi bi-list-ul me-2"></i>Izračuni</button></li><li class="nav-item" role="presentation"><button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="false"><i class="bi bi-graph-up me-2"></i>Statistika</button></li></ul><div class="tab-content" id="historyTabsContent"><div class="tab-pane fade show active" id="calculations" role="tabpanel" aria-labelledby="calculations-tab"><div id="historyList"></div></div><div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab"><canvas id="bloodSugarChart"></canvas><table id="bloodSugarTable"><thead><tr><th>Datum i vrijeme</th><th>Šećer u krvi (mmol/L)</th></tr></thead><tbody id="bloodSugarTableBody"></tbody></table></div></div></div><div class="container mt-4 d-none" id="aboutPage"><h2 class="mb-4 text-center"><i class="bi bi-info-circle me-2"></i>O aplikaciji</h2><div class="card"><div class="card-body"><h3>Kako koristiti aplikaciju</h3><ol><li>Na stranici "Kalkulator", unesite tražene podatke u sva polja.</li><li>Kliknite na dugme "Izračunaj dozu inzulina" da dobijete rezultat.</li><li>Rezultat će se prikazati u skočnom prozoru sa detaljima izračuna.</li><li>Svaki izračun se automatski sprema u historiju.</li></ol><h3>Korištenje historije</h3><ol><li>Kliknite na "Historija" u glavnom meniju da pregledate prethodne izračune.</li><li>U tabu "Izračuni" možete vidjeti sve prethodne izračune grupisane po mjesecima.</li><li>U tabu "Statistika" možete vidjeti grafički prikaz nivoa šećera u krvi za zadnjih 30 dana.</li><li>Svaki unos u historiji prikazuje datum i vrijeme izračuna, unesene podatke i rezultate.</li><li>Možete obrisati pojedinačne unose iz historije klikom na ikonu kante za smeće pored svakog unosa.</li></ol><p>Napomena: Ova aplikacija je namijenjena kao pomoćno sredstvo i ne zamjenjuje stručni medicinski savjet. Uvijek se posavjetujte sa svojim liječnikom o doziranju inzulina.</p></div></div></div></div><div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="resultModalLabel"><i class="bi bi-clipboard-data me-2"></i>Rezultat izračuna</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zatvori"></button></div><div class="modal-body" id="modalBody"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle me-2"></i>Zatvori</button></div></div></div></div><footer class="mt-5 text-center text-muted"><p>© 2024 InzulSmart. </p><p class="p-2">Razvila Mr.med.sci dr. Azra Feukić, specijalista pedijatar, subspecijalista pedijatrijske endokrinologije </p></footer><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script>
 const welcomePage = document.getElementById('welcomePage');
 const mainApp = document.getElementById('mainApp');
 const welcomeForm = document.getElementById('welcomeForm');
@@ -228,6 +244,8 @@ const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
 const modalBody = document.getElementById('modalBody');
 const navbarCollapse = document.querySelector('.navbar-collapse');
 const closeNavBtn = document.querySelector('.close-nav-btn');
+
+let bloodSugarChart;
 
 function showMainApp() {
   welcomePage.classList.add('d-none');
@@ -275,6 +293,7 @@ historyLink.addEventListener('click', (e) => {
   calculatorLink.classList.remove('active');
   historyLink.classList.add('active');
   aboutLink.classList.remove('active');
+  initializeChart();
   displayHistory();
   closeNavbar();
 });
@@ -336,38 +355,75 @@ insulinForm.addEventListener('submit', (e) => {
     carbDose
   });
   localStorage.setItem('insulinHistory', JSON.stringify(history));
+
+  // Update chart if it's initialized
+  if (bloodSugarChart) {
+    updateChart();
+  }
 });
 
 function displayHistory() {
   const history = JSON.parse(localStorage.getItem('insulinHistory') || '[]');
   historyList.innerHTML = '';
-  history.reverse().forEach(entry => {
+  
+  // Group entries by month
+  const groupedHistory = history.reduce((groups, entry) => {
     const date = new Date(entry.date);
-    const formattedDate = `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    const monthYear = `${date.getMonth() + 1}-${date.getFullYear()}`;
+    if (!groups[monthYear]) {
+      groups[monthYear] = [];
+    }
+    groups[monthYear].push(entry);
+    return groups;
+  }, {});
+
+  // Sort months in descending order
+  const sortedMonths = Object.keys(groupedHistory).sort((a, b) => {
+    const [monthA, yearA] = a.split('-');
+    const [monthB, yearB] = b.split('-');
+    return yearB - yearA || monthB - monthA;
+  });
+
+  sortedMonths.forEach(monthYear => {
+    const [month, year] = monthYear.split('-');
+    const monthName = new Date(year, month - 1).toLocaleString('default', { month: 'long' });
+    
     historyList.innerHTML += `
-      <div class="history-item" id="history-${entry.id}">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h5 class="mb-0">${formattedDate}</h5>
-          <i class="bi bi-trash delete-btn" onclick="deleteHistoryItem(${entry.id})"></i>
-        </div>
-        <div class="total-dose">
-          Ukupna doza inzulina: ${entry.totalDose.toFixed(1)} jedinica
-        </div>
-        <div class="input-data">
-          <h6>Uneseni podaci:</h6>
-          <p><strong>Unos ugljikohidrata:</strong> ${entry.carbIntake} g</p>
-          <p><strong>Šećer u krvi:</strong> ${entry.bloodSugar.toFixed(1)} mmol/L</p>
-          <p><strong>Omjer ugljikohidrata i inzulina:</strong> 1:${entry.carbRatio}</p>
-          <p><strong>Faktor osjetljivosti:</strong> ${entry.insulinSensitivity}</p>
-          <p><strong>Ciljani šećer u krvi:</strong> ${entry.targetBloodSugar.toFixed(1)} mmol/L</p>
-        </div>
-        <div class="result-data">
-          <h6>Rezultat:</h6>
-          <p><strong>Korekciona doza:</strong> ${entry.correctionDose.toFixed(1)} jedinica</p>
-          <p><strong>Ugljikohidratna doza:</strong> ${entry.carbDose.toFixed(1)} jedinica</p>
-        </div>
+      <div class="month-group mb-4">
+        <h3>${monthName} ${year}</h3>
+        <div id="month-${monthYear}"></div>
       </div>
     `;
+
+    const monthGroup = document.getElementById(`month-${monthYear}`);
+    groupedHistory[monthYear].sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(entry => {
+      const date = new Date(entry.date);
+      const formattedDate = `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+      monthGroup.innerHTML += `
+        <div class="history-item" id="history-${entry.id}">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">${formattedDate}</h5>
+            <i class="bi bi-trash delete-btn" onclick="deleteHistoryItem(${entry.id})"></i>
+          </div>
+          <div class="history-item-grid">
+            <div class="history-item-section">
+              <h6>Uneseni podaci</h6>
+              <p><strong>Ugljikohidrati:</strong> ${entry.carbIntake} g</p>
+              <p><strong>Šećer u krvi:</strong> ${entry.bloodSugar.toFixed(1)} mmol/L</p>
+              <p><strong>Omjer UH/inzulin:</strong> 1:${entry.carbRatio}</p>
+              <p><strong>Osjetljivost:</strong> ${entry.insulinSensitivity}</p>
+              <p><strong>Ciljani šećer:</strong> ${entry.targetBloodSugar.toFixed(1)} mmol/L</p>
+            </div>
+            <div class="history-item-section">
+              <h6>Rezultat</h6>
+              <p><strong>Ukupna doza inzulina:</strong> ${entry.totalDose.toFixed(1)} j</p>
+              <p><strong>Korekciona doza:</strong> ${entry.correctionDose.toFixed(1)} j</p>
+              <p><strong>UH doza:</strong> ${entry.carbDose.toFixed(1)} j</p>
+            </div>
+          </div>
+        </div>
+      `;
+    });
   });
 }
 
@@ -380,6 +436,7 @@ function deleteHistoryItem(id) {
   itemToRemove.classList.add('animate__animated', 'animate__fadeOutRight');
   itemToRemove.addEventListener('animationend', () => {
     displayHistory();
+    updateChart();
   });
 }
 
@@ -402,4 +459,102 @@ document.addEventListener('click', (e) => {
 document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
   link.addEventListener('click', closeNavbar);
 });
+
+function initializeChart() {
+  const ctx = document.getElementById('bloodSugarChart').getContext('2d');
+  bloodSugarChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Nivo šećera u krvi (mmol/L)',
+        data: [],
+        borderColor: '#28a745',
+        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+        tension: 0.1,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Kretanje nivoa šećera u krvi (zadnjih 30 dana)'
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          title: {
+            display: true,
+            text: 'Nivo šećera u krvi (mmol/L)'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Datum i vrijeme'
+          }
+        }
+      }
+    }
+  });
+  updateChart();
+}
+
+function updateChart() {
+  const history = JSON.parse(localStorage.getItem('insulinHistory') || '[]');
+
+  // Get the last 30 days
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+  // Filter and sort entries for the last 30 days
+  const recentEntries = history
+    .filter(entry => new Date(entry.date) >= thirtyDaysAgo)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  const labels = recentEntries.map(entry => {
+    const date = new Date(entry.date);
+    return `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+  });
+
+  const data = recentEntries.map(entry => entry.bloodSugar);
+
+  bloodSugarChart.data.labels = labels;
+  bloodSugarChart.data.datasets[0].data = data;
+  bloodSugarChart.update();
+
+  // Update table
+  const tableBody = document.getElementById('bloodSugarTableBody');
+  tableBody.innerHTML = '';
+  recentEntries.forEach(entry => {
+    const date = new Date(entry.date);
+    const formattedDate = `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    const row = tableBody.insertRow();
+    const dateCell = row.insertCell(0);
+    const sugarCell = row.insertCell(1);
+    dateCell.textContent = formattedDate;
+    sugarCell.textContent = entry.bloodSugar.toFixed(1);
+  });
+}
+
+// Initialize chart when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+  const statisticsTab = document.getElementById('statistics-tab');
+  statisticsTab.addEventListener('shown.bs.tab', () => {
+    if (!bloodSugarChart) {
+      initializeChart();
+    } else {
+      updateChart();
+    }
+  });
+});
+
+// Call displayHistory when the page loads to show existing history
+displayHistory();
 </script></body></html>
